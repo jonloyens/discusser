@@ -1,0 +1,10 @@
+{% extends "fbdiscuss/base.html" %}
+
+{% block content %}
+    <h1>{{discussion.topic}}</h1>
+    <p>{{discussion.description}}</p>
+    {% if dicussion.url %}
+        <p><a href="{{dicussion.url}}">{{dicussion.url}}</a></p>
+    {% endif %}
+    <fb:live-stream app_id="{{settings.FB_APP_ID}}" width="420" height="500" xid="{{discussion.guid}}"></fb:live-stream><br/>
+{% endblock %}

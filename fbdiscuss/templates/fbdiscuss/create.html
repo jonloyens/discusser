@@ -1,0 +1,23 @@
+{% extends "fbdiscuss/base.html" %}
+
+{% block logout_action %}
+    // refresh the page
+    location.reload(true);
+{% endblock %}
+
+{% block login_action %}
+    // refresh the page
+    location.reload(true)
+{% endblock %}
+
+{% block content %}
+    {% if user %}
+        <form action="" method="post" accept-charset="utf-8">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Continue &rarr;"></p>
+        </form>
+    {% else %}
+        <p>Please login with Facebook to create a discussion</p>
+    {% endif %}
+{% endblock %}

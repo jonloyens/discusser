@@ -83,6 +83,9 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+FB_APP_ID = "my app id"
+FB_APP_KEY = "my secret key"
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

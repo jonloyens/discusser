@@ -1,0 +1,12 @@
+{% extends "fbdiscuss/base.html" %}
+
+{% block content %}
+    <h1>Available Dicussions</h1>
+    <p>
+        <ul>
+            {% for d in dicussions %}
+                <li><a href="{% url fbdiscuss.discuss guid=d.guid %}"/>{{d.topic}}</a></li>
+            {% endfor %}
+        </ul>
+    </p>
+{% endblock %}

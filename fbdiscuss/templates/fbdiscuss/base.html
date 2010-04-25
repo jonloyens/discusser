@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    {% block globalmeta %}
+        <meta property="og:image" content="http://profile.ak.fbcdn.net/v224/1450/103/q895395363_4171.jpg" />
+        <meta property="og:url" content="http://loyens.org/discusser/" />
+        <meta property="fb:admins" content="loyens" />
+        <meta property="fb:app_id" content="{{settings.FB_APP_ID}}" />
+            <meta property="og:description"
+                 content="Realtime Facebook Discussions" />
+    {% endblock %}
+    
+    {% block localmeta %}
+        <meta property="og:title" content="Discusser - Realtime Facebook Discussions" />
+        <meta property="og:type" content="website" />
+    {% endblock %}
+
+	<title>Discusser - Facebook Based Realtime Discussions</title>
+	{% block globalcss %}
+	   <link rel="stylesheet" href="{{MEDIA_URL}}css/all.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	{% endblock %}
+	
+	{% block localcss %}
+	   
+	{% endblock %}
+	
+	{% block globaljs %}
+	   <script src="{{MEDIA_URL}}js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	{% endblock %}
+	
+	{% block localjs %}
+	   
+	{% endblock %}
+	
+</head>
+
+<body>
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({appId: '{{settings.FB_APP_ID}}', status: true, cookie: true, xfbml: true});
+        FB.Event.subscribe('auth.sessionChange', function(response) {
+            if (response.session) {
+              // A user has logged in, and a new cookie has been saved
+              {% block login_action %}
+                
+              {% endblock %}
+              console.log("logged in");
+            } else {
+              // The user has logged out, and the cookie has been cleared
+              {% block logout_action %}
+                
+              {% endblock %}
+              console.log("logged out");
+            }
+          });            
+      };
+      (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    </script>
+ 
+    <div id="outermost">
+        <fb:login-button show-faces="true" width="400" max-rows="1"></fb:login-button>
+        {% block content %}
+            
+        {% endblock %}
+        <fb:login-button autologoutlink="true" width="400" max-rows="1"></fb:login-button>
+    </div>
+</body>
+</html>
